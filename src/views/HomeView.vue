@@ -1,19 +1,16 @@
 <template>
   <v-app>
-    <!-- Header -->
     <v-app-bar app>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>E-Commerce </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text>Home</v-btn>
+      <v-btn text to="/home">Home</v-btn>
       <v-btn text>Your Catalog</v-btn>
       <v-btn text>Newslatter</v-btn>
-      <v-spacer></v-spacer> <!-- This spacer will push the following buttons to the right -->
-
-      <!-- Center-aligned buttons -->
+      <v-spacer></v-spacer>
       <v-row>
-        <v-btn text class="sign-in-button">SignIn</v-btn>
-        <v-btn text class="sign-up-button">SignUp</v-btn>
+        <v-btn text class="sign-in-button" to="/LoginIn">SignIn</v-btn>
+        <v-btn text class="sign-up-button" to="/SignUp">Register</v-btn>
       </v-row>
     </v-app-bar>
 
@@ -22,18 +19,17 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12">
-          <!-- Hero Section -->
           <div class="hero-container">
             <v-carousel hide-delimiters>
               <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" cover></v-carousel-item>
             </v-carousel>
             <div class="hero-content">
               <h1 class="hero-title">Welcome to Our E-Commerce Store</h1>
-              <p class="hero-description">Discover the best products at amazing prices.</p>
-              <v-btn color="primary">Shop Now</v-btn>
+              <p class="hero-description">Discover the best products at amazing Prices.</p>
+              <v-btn color="primary" to="/LoginIn">Shop Now</v-btn>
             </div>
           </div>
-          <!-- End Hero Section -->
+
         </v-col>
       </v-row>
     </v-container>
@@ -67,7 +63,7 @@
         </v-row>
       </v-container>
     </div>
-    <!-- card  -->
+
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -83,7 +79,6 @@
               <v-btn color="primary">Buy Now</v-btn>
             </v-card-text>
           </v-card>
-          <!-- End Card -->
         </v-col>
       </v-row>
     </v-container>
@@ -117,7 +112,9 @@
           </v-btn>
         </v-col>
       </v-row>
+
     </v-container>
+
   </v-app>
 </template>
 
@@ -131,10 +128,11 @@ export default {
   data() {
     return {
       cart: [],
-      email: '', // Stores the email address entered by the user
+      email: '',
       emailRules: [
-        (v) => !!v || 'Email is required',
-        (v) => /.+@.+\..+/.test(v) || 'Email must be valid',
+        v => !!v || 'Email is required',
+        v => /.+@.+\..+/.test(v) || 'Enter a valid email address',
+        v => v.endsWith('gmail.com') || 'Enter a valid email address',
       ],
       items: [
         {
@@ -145,7 +143,7 @@ export default {
           src: 'https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=754&h=502&fit=crop&dpr=1',
           alt: 'Image 1',
         },
-        // Add more items as needed
+
       ],
 
 
@@ -154,10 +152,9 @@ export default {
   },
   methods: {
     subscribeToNewsletter() {
-      // Implement your newsletter subscription logic here,
-      // for example, send the email address to your server.
+
       console.log('Subscribed with email:', this.email);
-      // You can also reset the email field after successful submission
+
       this.email = '';
     },
 
@@ -165,7 +162,6 @@ export default {
 };
 </script>
 <style>
-/* Global Styles */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -177,41 +173,28 @@ div.v-carousel {
   margin-bottom: 20px;
 }
 
-/* Header Styles */
 .v-app-bar {
   background-color: #1976D2;
-  /* Header background color */
   color: white;
 
-  /* Header text color */
 }
 
-/* Add styles for the "SignIn" button */
 .sign-in-button {
   background-color: #007BFF;
-  /* Blue background color for SignIn */
   color: white;
-  /* White text color */
   font-weight: bold;
-  /* margin-block: 10px; */
   margin-inline-end: 10px;
 }
 
-/* Add styles for the "SignUp" button */
 .sign-up-button {
   background-color: #FF5733;
-  /* Orange background color for SignUp */
   color: white;
-  /* White text color */
   font-weight: bold;
-  /* Bold text */
-  /* Add any other styles you want */
 }
 
 .hero-container {
   position: relative;
   height: 400px;
-  /* Adjust the height as needed */
   overflow: hidden;
 }
 
@@ -243,12 +226,10 @@ div.v-carousel {
   margin-bottom: 24px;
 }
 
-/* newsletter */
 
 
 .newsletter-section {
   background-color: #f8f8f8;
-  /* Set the background color to your preference */
   padding: 60px 0;
 }
 
@@ -259,14 +240,12 @@ div.v-carousel {
 .newsletter-title {
   font-size: 32px;
   color: #333;
-  /* Change the text color to your preference */
   margin-bottom: 20px;
 }
 
 .newsletter-description {
   font-size: 18px;
   color: #666;
-  /* Change the text color to your preference */
   margin-bottom: 40px;
 }
 
@@ -276,6 +255,8 @@ div.v-carousel {
   align-items: center;
 }
 
+
+
 .subscribe-button {
   font-size: 10px;
   padding: 10px 30px;
@@ -284,71 +265,54 @@ div.v-carousel {
 /* Footer Styles */
 
 
-.v-footer {
+.v-container {
   position: "relative";
-  background-color: #f5f5f5;
-  /* Footer background color */
+  background-color: #e4e0e0;
   padding: 20px 0;
   color: #333;
-  /* Footer text color */
 }
 
-.v-list-item-title {
-  font-weight: bold;
-}
 
-/* Follow Us Icons Styles */
 .v-btn.icon.large {
   margin-right: 10px;
-  /* margin-top: "10px"; */
 
 }
 
 .custom-card {
-  /* Customize card container styles */
   max-width: auto;
   margin-top: "20px";
   margin: 0 auto;
 }
 
 .custom-card-title {
-  /* Customize card title styles */
   font-size: 24px;
   color: #333;
 }
 
 .custom-image {
-  /* Customize image styles */
   max-width: 100%;
   height: auto;
 }
 
 .custom-description {
-  /* Customize description text styles */
   font-size: 16px;
   color: #666;
   margin-top: 20px;
 }
 
 .custom-price {
-  /* Customize price text styles */
   font-size: 18px;
   color: #f00;
-  /* Red color for price */
   margin-top: 10px;
 }
 
 .custom-button {
-  /* Customize button styles */
   background-color: #007bff;
-  /* Blue color for button */
   color: #fff;
   margin-top: 10px;
 }
 
 .custom-button:hover {
-  /* Hover effect for the button */
   background-color: #0056b3;
-  /* Darker blue on hover */
 }
 </style>
