@@ -23,9 +23,10 @@
                             </v-card-title>
                             <v-card-text>
                                 <v-form @submit.prevent="login">
-                                    <v-text-field label="Username" v-model="username" outlined required></v-text-field>
-                                    <v-text-field label="Password" v-model="password" outlined type="password"
-                                        required></v-text-field>
+                                    <v-text-field label="email" v-model="email" outlined required
+                                        :rules="emailRules"></v-text-field>
+                                    <v-text-field label="Password" v-model="password" outlined type="password" required
+                                        :rules="passwordRules"></v-text-field>
                                     <v-btn type="submit" color="primary" class="login-button">
                                         Login
                                     </v-btn>
@@ -46,12 +47,39 @@
 </template>
   
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
-            username: '',
+            email: '',
             password: '',
+            emailRules: [
+                v => !!v || 'email is required',
+            ],
+            passwordRules: [
+                v => !!v || 'password is required',
+            ],
         };
+    },
+    methods: {
+        login() {
+            if (this.formAvailable && !this.$refs.form.validate()) {
+                return;
+            }
+            console.log('User Details:');
+            console.log('Email:', this.email);
+            console.log('Password:', this.password);
+
+
+            axios.post("http://10.0.10.220:8080/api/login", {
+                email: this.email,
+                password: this.password
+            
+            })
+            this.$router.push("/dashboard")
+
+
+        },
     },
 
 };

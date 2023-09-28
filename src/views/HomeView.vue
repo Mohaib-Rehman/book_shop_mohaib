@@ -4,14 +4,15 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>E-Commerce </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text to="/home">Home</v-btn>
-      <v-btn text>Your Catalog</v-btn>
-      <v-btn text>Newslatter</v-btn>
+      <v-btn text to="/">Home</v-btn>
+      <v-btn text to="/ProductListing">Your Catalog</v-btn>
+      <v-btn text to="/NewsLetter">Newslatter</v-btn>
       <v-spacer></v-spacer>
       <v-row>
         <v-btn text class="sign-in-button" to="/LoginIn">SignIn</v-btn>
         <v-btn text class="sign-up-button" to="/SignUp">Register</v-btn>
       </v-row>
+      <router-view></router-view>
     </v-app-bar>
 
 
@@ -39,36 +40,15 @@
 
 
     <!-- newsletter -->
-    <div class="newsletter-section">
-      <v-container>
-        <v-row justify="center" align="center">
-          <v-col cols="12" sm="10" md="8" lg="6">
-            <div class="newsletter-content">
-              <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
-              <p class="newsletter-description">Stay up-to-date with our latest products and offers by subscribing to our
-                newsletter.</p>
-              <form @submit.prevent="subscribeToNewsletter" class="newsletter-form">
-                <v-row align="center">
-                  <v-col cols="12" sm="8">
-                    <v-text-field v-model="email" label="Email" outlined color="primary" required
-                      :rules="emailRules"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="4">
-                    <v-btn type="submit" outlined color="primary" class="subscribe-button">Subscribe</v-btn>
-                  </v-col>
-                </v-row>
-              </form>
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
-    </div>
+    <NewsLetter />
+
+    <PremiumPlan />
 
     <v-container>
       <v-row>
         <v-col cols="12">
           <!-- Card -->
-          <v-card>
+          <v-card class="featured-product-card">
             <v-card-title>Featured Product</v-card-title>
             <v-card-text>
               <v-img
@@ -76,11 +56,12 @@
                 alt="Featured Product" contain></v-img>
               <p>This is a featured product description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               <p>Price: $29.99</p>
-              <v-btn color="primary">Buy Now</v-btn>
+              <v-btn color="primary" to="/LoginIn">Buy Now</v-btn>
             </v-card-text>
           </v-card>
         </v-col>
       </v-row>
+      <router-view></router-view>
     </v-container>
 
     <!-- Footer -->
@@ -120,10 +101,15 @@
 
 <script>
 import ProductListing from './ProductListing.vue';
+import PremiumPlan from './PremiumPlan.vue';
+import NewsLetter from './NewsLetter.vue'
+
 export default {
 
   components: {
-    ProductListing
+    ProductListing,
+    PremiumPlan,
+    NewsLetter,
   },
   data() {
     return {
@@ -150,15 +136,7 @@ export default {
       footerLinks: ["About Us", "Shipping & Returns", "Privacy Policy", "Terms & Conditions"],
     };
   },
-  methods: {
-    subscribeToNewsletter() {
 
-      console.log('Subscribed with email:', this.email);
-
-      this.email = '';
-    },
-
-  },
 };
 </script>
 <style>
@@ -260,6 +238,40 @@ div.v-carousel {
 .subscribe-button {
   font-size: 10px;
   padding: 10px 30px;
+}
+
+.featured-product-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.featured-product-card v-card-title {
+  font-size: 24px;
+  color: #333;
+}
+
+.featured-product-card v-card-text {
+  margin-top: 20px;
+}
+
+.featured-product-card p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.featured-product-card v-btn {
+  background-color: #007BFF;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
+.featured-product-card v-btn:hover {
+  background-color: #0056b3;
 }
 
 /* Footer Styles */
