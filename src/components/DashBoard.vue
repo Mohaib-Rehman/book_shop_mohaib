@@ -25,7 +25,7 @@
 
 
         <v-main>
-            <v-container>
+            
                 <swiper :options="swiperOptions" class="swiper-container" style="height: 300px;">
                     <swiper-slide v-for="(image, index) in sliderImages" :key="index">
                         <img :src="image" alt="Slider Image" style="width: 100%; height: 100%; object-fit: cover;" />
@@ -34,7 +34,9 @@
                     <swiper-button-prev class="swiper-button-prev"></swiper-button-prev>
                     <swiper-button-next class="swiper-button-next"></swiper-button-next>
                 </swiper>
-            </v-container>
+           
+            <TableForm />
+            <UserDataTable />
 
             <router-view></router-view>
         </v-main>
@@ -42,19 +44,8 @@
             <v-app-bar-nav-icon @click="sidebarOpen = !sidebarOpen"></v-app-bar-nav-icon>
             <v-toolbar-title>Dashboard</v-toolbar-title>
             <v-spacer></v-spacer>
-
-
-            <v-container class="container-form ">
-
-
-                <v-row justify="center">
-                    <v-col cols="12" sm="6" md="6" lg="4">
-                        <v-text-field v-model="search" label="Search" hide-details append-icon="mdi-magnify"></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-container>
-
-            <v-btn icon>
+           
+            <v-btn icon to="/AddToCart">
                 <v-icon @click="addToCart">mdi-cart-plus</v-icon>
             </v-btn>
             <v-btn @click="signout" to="/LoginIn">Sign Out</v-btn>
@@ -66,10 +57,13 @@
 <script>
 import 'swiper/swiper-bundle.css';
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import UserDataTable from "@/components/UserDataTable.vue"
+
 export default {
     components: {
         Swiper,
         SwiperSlide,
+        UserDataTable,
     },
     data() {
         return {
@@ -87,7 +81,7 @@ export default {
                 },
             },
             sliderImages: [
-                // Add your image URLs here
+                
                 'https://plus.unsplash.com/premium_photo-1664300897489-fd98eee64faf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
                 'https://images.unsplash.com/photo-1566131807516-e3b3cd1a89d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
                 'https://plus.unsplash.com/premium_photo-1661964153042-56211a8e2d0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',

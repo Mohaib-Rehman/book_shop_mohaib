@@ -16,8 +16,9 @@
     </v-app-bar>
 
 
+
     <!-- Hero Section -->
-    <v-container fluid>
+    <v-container class="hero-section" fluid>
       <v-row>
         <v-col cols="12">
           <div class="hero-container">
@@ -168,6 +169,10 @@ div.v-carousel {
   background-color: #FF5733;
   color: white;
   font-weight: bold;
+}
+
+.hero-section {
+  margin-bottom: 20px;
 }
 
 .hero-container {

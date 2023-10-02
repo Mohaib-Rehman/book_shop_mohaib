@@ -1,15 +1,18 @@
 /* eslint-disable */
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import CartPage from "@/views/CartPage.vue"; 
+
 import SignUp from "@/views/SignUp.vue";
-import NewsLetter from "@/views/NewsLetter.vue"
-import DashBoard from "@/components/DashBoard.vue"
+import NewsLetter from "@/views/NewsLetter.vue";
+import DashBoard from "@/components/DashBoard.vue";
 import ProductListing from '@/views/ProductListing.vue';
-import ShowCards from "@/views/ShowCards.vue"
+import ShowCards from "@/views/ShowCards.vue";
+import StarRating from "@/components/StarRating.vue";
+import AddToCart from "@/components/AddToCart.vue";
+import UserDataTable from "@/components/UserDataTable.vue";
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView
    
@@ -18,6 +21,12 @@ const routes = [
     path: '/ShowCards',
     name: 'ShowCards',
     component: ShowCards
+   
+  },
+  {
+    path: '/StarRating',
+    name: 'StarRating',
+    component: StarRating
    
   },
   {
@@ -32,22 +41,29 @@ const routes = [
     component:ProductListing
     
   },
+ 
   
   
-  {
-    path: "/cart",
-    name: "cart",
-    component: CartPage,
-  },
+  
   {
     path: "/NewsLetter",
     name: "NewsLetter",
     component: NewsLetter,
   },
   {
+    path: "/UserDataTable",
+    name: "UserDataTable",
+    component: UserDataTable ,
+  },
+  {
     path: "/SignUp",
     name: "signup",
     component: SignUp,
+  },
+  {
+    path: "/AddtoCart",
+    name: "AddtoCart",
+    component: AddToCart,
   },
   {
     path: '/about',
